@@ -39,10 +39,9 @@ const sequelize = {
     model.prototype.reload = jest.fn()
     model.prototype.set = jest.fn()
     Object.keys(modelDefn).forEach(attachProp)
+ 
+    Object.entries(metaData).forEach(([key, value]) => typeof value !== 'function' && model.prototype[key] = value)
 
-    model.prototype.indexes = metaData.indexes
-    model.prototype.scopes = metaData.scopes
-    model.prototype.validate = metaData.validate
     return model
   }
 }
